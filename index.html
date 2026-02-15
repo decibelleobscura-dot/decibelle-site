@@ -30,9 +30,9 @@
       <p class="step-label">The First Rite</p>
       <h2>Terms of Worship</h2>
       <div class="prose">
-        <p>I do not see everyone. I do not answer to everyone.</p>
-        <p>What follows is a confession. You will answer honestly, thoroughly, and with the reverence I expect. Anything less will be dismissed without a word.</p>
-        <p>Submission is earned through effort. Show me you are worthy of my time.</p>
+        <p>Very few are granted my attention.</p>
+        <p>What follows is your confession. You will answer honestly, thoroughly, and with the reverence I expect. Anything less will be dismissed without a word.</p>
+        <p>Prove to me you are worthy of it.</p>
       </div>
       <div class="deco-line"></div>
       <div class="step-nav">
@@ -45,11 +45,11 @@
   <section class="step step-content" data-step="2">
     <div class="container">
       <p class="step-label">The Offering</p>
-      <h2>Kneel and Be Known</h2>
+      <h2>Present Yourself</h2>
       <form id="form-about" novalidate>
         <div class="field-row">
           <div class="field">
-            <label for="name">Name or Alias <span class="req">*</span></label>
+            <label for="name">Name <span class="req">*</span></label>
             <input type="text" id="name" name="name" required>
           </div>
           <div class="field">
@@ -72,8 +72,12 @@
           <input type="text" id="location" name="location" required>
         </div>
         <div class="field">
+          <label for="pet-names">Preferred Pet Names</label>
+          <input type="text" id="pet-names" name="pet_names" placeholder="e.g. boy, pet, slave, puppy, kitten">
+        </div>
+        <div class="field">
           <label for="about-you">Introduce Yourself <span class="req">*</span></label>
-          <textarea id="about-you" name="about_you" rows="4" required placeholder="Who are you? What brings you to kneel before me?"></textarea>
+          <textarea id="about-you" name="about_you" rows="4" required placeholder="Who are you? What draws you to worship?"></textarea>
         </div>
         <div class="step-nav">
           <button type="button" class="nav-btn back step-back" data-back="1">Back</button>
@@ -148,7 +152,19 @@
       <form id="form-limits" novalidate>
         <div class="field">
           <label for="hard-limits">Hard Limits <span class="req">*</span></label>
-          <textarea id="hard-limits" name="hard_limits" rows="4" required placeholder="What is sacred? What must never be crossed? Be honest — even a Goddess respects a boundary."></textarea>
+          <textarea id="hard-limits" name="hard_limits" rows="4" required placeholder="What must never be crossed? Be honest — even a Goddess honours a boundary."></textarea>
+        </div>
+        <div class="field">
+          <label for="trigger-positive">Words That Excite You</label>
+          <input type="text" id="trigger-positive" name="trigger_positive" placeholder="e.g. degradation, praise, being told you're mine">
+        </div>
+        <div class="field">
+          <label for="trigger-negative">Words That Should Be Avoided</label>
+          <input type="text" id="trigger-negative" name="trigger_negative" placeholder="e.g. specific insults, names, themes">
+        </div>
+        <div class="field">
+          <label for="trigger-context">Anything to Explain?</label>
+          <textarea id="trigger-context" name="trigger_context" rows="3" placeholder="Context behind any of the above — I want to understand, not just obey a list."></textarea>
         </div>
         <div class="field">
           <label for="health">Health or Medical Information</label>
@@ -166,12 +182,12 @@
   <section class="step step-content" data-step="6">
     <div class="container">
       <div id="whisper-6" class="whisper"></div>
-      <p class="step-label">The Final Rite</p>
-      <h2>Your Last Prayer</h2>
+      <p class="step-label">The Final Word</p>
+      <h2>Any Last Words?</h2>
       <form id="form-final" novalidate>
         <div class="field">
-          <label for="additional">Unspoken desires, devotions, prayers</label>
-          <textarea id="additional" name="additional" rows="4" placeholder="What haven't you confessed? This is your last prayer before I decide your fate."></textarea>
+          <label for="additional">Anything left unsaid</label>
+          <textarea id="additional" name="additional" rows="4" placeholder="Speak now. After this, the decision is mine."></textarea>
         </div>
 
         <div class="consent-block">
@@ -205,13 +221,13 @@
   <section class="step step-content" data-step="7">
     <div class="container confirmation">
       <div class="deco-diamond"></div>
-      <h2>Your Prayer Has Been Received</h2>
+      <h2>Your Confession Has Been Received</h2>
       <div class="prose">
         <p>Your words belong to me now. I will consider them when I see fit.</p>
-        <p><strong>Not all prayers are answered.</strong> Only those who intrigue me will hear from me.</p>
+        <p><strong>A response is not guaranteed.</strong> Only those who intrigue me will hear from me.</p>
       </div>
       <div class="tribute-nudge">
-        <p>A tribute is an act of worship. It will not guarantee my favour — but it proves your devotion is real.</p>
+        <p>A tribute is an act of devotion. It will not guarantee my favour — but it proves your sincerity.</p>
         <div class="tribute-options">
           <a href="#" class="tribute-link" id="wishlist-link">Offering</a>
           <a href="#" class="tribute-link" id="giftcard-link">Tribute</a>
