@@ -554,6 +554,38 @@ select option { background: var(--black); color: var(--cream); }
   font-size: 0.9rem;
 }
 
+/* ── Whisper (praise + prompts) ──── */
+.whisper {
+  text-align: center;
+  margin-bottom: 1.5rem;
+  animation: whisperIn 0.8s ease forwards;
+  opacity: 0;
+}
+
+@keyframes whisperIn {
+  0% { opacity: 0; transform: translateY(-8px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+
+.whisper-praise {
+  display: block;
+  font-family: var(--font-body);
+  font-style: italic;
+  font-size: 1.15rem;
+  color: var(--burgundy-glow);
+  letter-spacing: 0.05em;
+  margin-bottom: 0.3rem;
+}
+
+.whisper-prompt {
+  display: block;
+  font-family: var(--font-body);
+  font-style: italic;
+  font-size: 0.95rem;
+  color: var(--grey);
+  letter-spacing: 0.03em;
+}
+
 /* ── Validation ───────────────────── */
 .field-error input,
 .field-error select,
