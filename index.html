@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DeciBelle — Private Sessions</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <!-- Landing -->
+  <header class="hero">
+    <div class="hero-overlay"></div>
+    <div class="hero-content">
+      <div class="monogram">DB</div>
+      <h1>DeciBelle</h1>
+      <p class="tagline">By Invitation. By Interest. By Design.</p>
+      <a href="#enquiry" class="cta-btn">Submit an Enquiry</a>
+    </div>
+    <div class="deco-border top"></div>
+    <div class="deco-border bottom"></div>
+  </header>
+
+  <!-- About / Expectations -->
+  <section class="about" id="about">
+    <div class="container">
+      <div class="deco-diamond"></div>
+      <h2>Before You Enquire</h2>
+      <div class="about-text">
+        <p>I am selective. Receiving a response is not guaranteed. I will only engage with enquiries that genuinely interest me.</p>
+        <p>Complete the form below thoroughly and honestly. Vague or incomplete submissions will be discarded without notice.</p>
+        <p>Your chances of a timely response improve significantly with a <a href="#tribute" class="inline-link">tribute or gift</a>.</p>
+      </div>
+      <div class="deco-line"></div>
+    </div>
+  </section>
+
+  <!-- Enquiry Form -->
+  <section class="enquiry" id="enquiry">
+    <div class="container">
+      <h2>Session Enquiry</h2>
+      <form id="enquiry-form" novalidate>
+
+        <!-- Personal Details -->
+        <fieldset>
+          <legend>Your Details</legend>
+          <div class="field-row">
+            <div class="field">
+              <label for="name">Name / Alias <span class="req">*</span></label>
+              <input type="text" id="name" name="name" required>
+            </div>
+            <div class="field">
+              <label for="age">Age <span class="req">*</span></label>
+              <input type="number" id="age" name="age" min="18" required>
+            </div>
+          </div>
+          <div class="field-row">
+            <div class="field">
+              <label for="email">Email <span class="req">*</span></label>
+              <input type="email" id="email" name="email" required>
+            </div>
+            <div class="field">
+              <label for="pronouns">Your Pronouns</label>
+              <input type="text" id="pronouns" name="pronouns" placeholder="e.g. he/him, they/them">
+            </div>
+          </div>
+          <div class="field">
+            <label for="location">Your City / Region <span class="req">*</span></label>
+            <input type="text" id="location" name="location" required>
+          </div>
+          <div class="field">
+            <label for="about-you">Tell me about yourself — briefly. <span class="req">*</span></label>
+            <textarea id="about-you" name="about_you" rows="3" required placeholder="Who are you? What draws you to this?"></textarea>
+          </div>
+        </fieldset>
+
+        <!-- Session Preferences -->
+        <fieldset>
+          <legend>Session Preferences</legend>
+          <div class="field-row">
+            <div class="field">
+              <label for="duration">Session Duration <span class="req">*</span></label>
+              <select id="duration" name="duration" required>
+                <option value="">Select…</option>
+                <option value="1hr">1 hour</option>
+                <option value="1.5hr">1.5 hours</option>
+                <option value="2hr">2 hours</option>
+                <option value="3hr">3 hours</option>
+                <option value="half-day">Half day (4+ hours)</option>
+                <option value="extended">Extended / Overnight</option>
+              </select>
+            </div>
+            <div class="field">
+              <label for="session-type">Session Type <span class="req">*</span></label>
+              <select id="session-type" name="session_type" required>
+                <option value="">Select…</option>
+                <option value="in-person">In-Person</option>
+                <option value="online">Online / Virtual</option>
+                <option value="either">Open to Either</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="field">
+            <label for="preferred-dates">Preferred Date(s)</label>
+            <input type="text" id="preferred-dates" name="preferred_dates" placeholder="e.g. weekday evenings, specific date, flexible">
+          </div>
+        </fieldset>
+
+        <!-- Categories Checklist -->
+        <fieldset class="categories-fieldset">
+          <legend>Interests & Experience</legend>
+          <p class="field-note">For each category, indicate your <strong>interest level</strong>, <strong>experience</strong>, and any <strong>boundaries</strong>.</p>
+
+          <div id="categories-container">
+            <!-- Categories are injected by JS from config -->
+          </div>
+        </fieldset>
+
+        <!-- Additional Info -->
+        <fieldset>
+          <legend>Additional Information</legend>
+          <div class="field">
+            <label for="hard-limits">Hard Limits — What is completely off the table? <span class="req">*</span></label>
+            <textarea id="hard-limits" name="hard_limits" rows="3" required placeholder="Be specific. This protects us both."></textarea>
+          </div>
+          <div class="field">
+            <label for="health">Relevant Health / Medical Information</label>
+            <textarea id="health" name="health" rows="2" placeholder="Anything I should be aware of (physical or mental)."></textarea>
+          </div>
+          <div class="field">
+            <label for="additional">Anything Else?</label>
+            <textarea id="additional" name="additional" rows="3" placeholder="Fantasies, specific scenarios, questions…"></textarea>
+          </div>
+        </fieldset>
+
+        <!-- Consent -->
+        <fieldset>
+          <legend>Acknowledgements</legend>
+          <label class="checkbox-label">
+            <input type="checkbox" name="consent_age" required>
+            <span>I confirm I am 18 years of age or older. <span class="req">*</span></span>
+          </label>
+          <label class="checkbox-label">
+            <input type="checkbox" name="consent_response" required>
+            <span>I understand that submitting this form does not guarantee a response. <span class="req">*</span></span>
+          </label>
+          <label class="checkbox-label">
+            <input type="checkbox" name="consent_id" required>
+            <span>I understand that booking confirmation will require a copy of valid ID and a deposit. <span class="req">*</span></span>
+          </label>
+          <label class="checkbox-label">
+            <input type="checkbox" name="consent_privacy" required>
+            <span>I consent to my data being used solely for the purpose of this enquiry. <span class="req">*</span></span>
+          </label>
+        </fieldset>
+
+        <button type="submit" class="submit-btn">Submit Enquiry</button>
+      </form>
+    </div>
+  </section>
+
+  <!-- Tribute -->
+  <section class="tribute" id="tribute">
+    <div class="container">
+      <div class="deco-diamond"></div>
+      <h2>Tribute</h2>
+      <p>A tribute demonstrates sincerity and respect for my time. It does not guarantee a session, but it does guarantee my attention.</p>
+      <div class="tribute-options">
+        <a href="#" class="tribute-link" id="wishlist-link">
+          <span class="tribute-icon">♠</span>
+          <span>Wishlist</span>
+        </a>
+        <a href="#" class="tribute-link" id="giftcard-link">
+          <span class="tribute-icon">♦</span>
+          <span>Gift Card</span>
+        </a>
+      </div>
+      <p class="tribute-note">Links will be provided upon request or after form submission.</p>
+    </div>
+  </section>
+
+  <!-- Confirmation Modal -->
+  <div class="modal-overlay" id="confirmation-modal">
+    <div class="modal">
+      <div class="modal-deco">✦</div>
+      <h3>Enquiry Received</h3>
+      <p>Thank you for your submission. I will review it at my discretion.</p>
+      <p><strong>Please note:</strong> A response is not guaranteed. I will only reply if your enquiry interests me.</p>
+      <p class="modal-highlight">Improve your chances — send a <a href="#tribute" class="inline-link" id="modal-tribute-link">tribute</a> to demonstrate your sincerity.</p>
+      <button class="modal-close" id="modal-close">Understood</button>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container">
+      <div class="deco-line"></div>
+      <p class="footer-text">DeciBelle — All rights reserved.</p>
+      <p class="footer-sub">Discretion assured. Privacy respected.</p>
+    </div>
+  </footer>
+
+  <script src="js/categories.js"></script>
+  <script src="js/form.js"></script>
+</body>
+</html>
