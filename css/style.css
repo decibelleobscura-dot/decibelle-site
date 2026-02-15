@@ -195,13 +195,36 @@ a:hover { color: var(--burgundy-glow); }
   width: 100%;
 }
 
-.step-count {
+.step-label {
   font-family: var(--font-display);
-  font-size: 0.7rem;
+  font-size: 0.65rem;
   letter-spacing: 0.3em;
+  text-transform: uppercase;
   color: var(--burgundy-glow);
   text-align: center;
-  margin-bottom: 0.75rem;
+  margin-bottom: 0.4rem;
+}
+
+/* ── Whisper (praise) ─────────────── */
+.whisper {
+  text-align: center;
+  margin-bottom: 1.2rem;
+  min-height: 1.5em;
+  opacity: 0;
+  animation: whisperIn 1s ease 0.2s forwards;
+}
+
+@keyframes whisperIn {
+  0% { opacity: 0; transform: translateY(-6px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+
+.whisper-praise {
+  font-family: var(--font-body);
+  font-style: italic;
+  font-size: 1.1rem;
+  color: var(--burgundy-glow);
+  letter-spacing: 0.05em;
 }
 
 .step-content h2 {
