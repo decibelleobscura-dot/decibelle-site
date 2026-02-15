@@ -9,6 +9,20 @@ document.addEventListener('DOMContentLoaded', () => {
   let currentStep = 0;
   const formData = {};
 
+  // ── Pronoun "Other" toggle ────────
+  document.querySelectorAll('input[name="pronouns"]').forEach(radio => {
+    radio.addEventListener('change', () => {
+      const otherInput = document.getElementById('pronouns-other');
+      if (radio.value === 'other' && radio.checked) {
+        otherInput.style.display = 'block';
+        otherInput.focus();
+      } else {
+        otherInput.style.display = 'none';
+        otherInput.value = '';
+      }
+    });
+  });
+
   // ── Praise based on pronouns ──────
   const praiseLines = {
     'he/him':    ['Good boy.', 'Very good, boy.', 'You obey well.', 'That pleases me.'],
@@ -17,8 +31,17 @@ document.addEventListener('DOMContentLoaded', () => {
   };
   const defaultLines = ['Very good.', 'You obey well.', 'That pleases me.', 'Continue.'];
 
+  function getSelectedPronouns() {
+    const checked = document.querySelector('input[name="pronouns"]:checked');
+    if (!checked) return '';
+    if (checked.value === 'other') {
+      return (document.getElementById('pronouns-other')?.value || '').toLowerCase().trim();
+    }
+    return checked.value;
+  }
+
   function getPraise(index) {
-    const pronouns = (document.getElementById('pronouns')?.value || '').toLowerCase().trim();
+    const pronouns = getSelectedPronouns();
     const key = Object.keys(praiseLines).find(k => pronouns.includes(k));
     const lines = key ? praiseLines[key] : defaultLines;
     return lines[Math.min(index, lines.length - 1)];
@@ -46,7 +69,6 @@ document.addEventListener('DOMContentLoaded', () => {
       if (whisperEl) {
         const praiseIndex = n - 3;
         whisperEl.innerHTML = `<span class="whisper-praise">${getPraise(praiseIndex)}</span>`;
-        // Re-trigger animation
         whisperEl.style.animation = 'none';
         void whisperEl.offsetWidth;
         whisperEl.style.animation = '';
@@ -69,6 +91,8 @@ document.addEventListener('DOMContentLoaded', () => {
     container.querySelectorAll('input, select, textarea').forEach(el => {
       if (el.type === 'checkbox') {
         formData[el.name] = el.checked;
+      } else if (el.type === 'radio') {
+        if (el.checked) formData[el.name] = el.value;
       } else if (el.value.trim()) {
         formData[el.name] = el.value.trim();
       }
@@ -84,6 +108,16 @@ document.addEventListener('DOMContentLoaded', () => {
       if (field.type === 'checkbox' && !field.checked) {
         valid = false;
         field.closest('.checkbox-label')?.classList.add('field-error');
+      } else if (field.type === 'radio') {
+        const group = container.querySelectorAll(`input[name="${field.name}"]`);
+        const anyChecked = Array.from(group).some(r => r.checked);
+        if (!anyChecked) {
+          valid = false;
+          const wrapper = field.closest('.field');
+          if (wrapper && !wrapper.classList.contains('field-error')) {
+            wrapper.classList.add('field-error');
+          }
+        }
       } else if (!field.value.trim()) {
         valid = false;
         const wrapper = field.closest('.field') || field.parentElement;

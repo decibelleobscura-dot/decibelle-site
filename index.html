@@ -23,7 +23,7 @@
     <div class="deco-border bottom"></div>
   </section>
 
-  <!-- Step 1: Expectations -->
+  <!-- Step 1: Threshold -->
   <section class="step step-content" data-step="1">
     <div class="container">
       <div class="deco-diamond"></div>
@@ -58,15 +58,35 @@
             <input type="number" id="age" name="age" min="18" required>
           </div>
         </div>
-        <div class="field-row">
-          <div class="field">
-            <label for="email">Email <span class="req">*</span></label>
-            <input type="email" id="email" name="email" required>
+        <div class="field">
+          <label for="email">Email <span class="req">*</span></label>
+          <input type="email" id="email" name="email" required>
+        </div>
+        <div class="field">
+          <label>Your Pronouns <span class="req">*</span></label>
+          <div class="pronoun-options">
+            <label class="radio-label">
+              <input type="radio" name="pronouns" value="he/him" required>
+              <span class="radio-box"></span>
+              <span>He / Him</span>
+            </label>
+            <label class="radio-label">
+              <input type="radio" name="pronouns" value="she/her" required>
+              <span class="radio-box"></span>
+              <span>She / Her</span>
+            </label>
+            <label class="radio-label">
+              <input type="radio" name="pronouns" value="they/them" required>
+              <span class="radio-box"></span>
+              <span>They / Them</span>
+            </label>
+            <label class="radio-label">
+              <input type="radio" name="pronouns" value="other" required>
+              <span class="radio-box"></span>
+              <span>Other</span>
+            </label>
           </div>
-          <div class="field">
-            <label for="pronouns">Your Pronouns</label>
-            <input type="text" id="pronouns" name="pronouns" placeholder="e.g. he/him, they/them">
-          </div>
+          <input type="text" id="pronouns-other" name="pronouns_other" class="pronoun-other-input" placeholder="Specify your pronouns" style="display:none;">
         </div>
         <div class="field">
           <label for="location">City or Region <span class="req">*</span></label>
@@ -88,11 +108,61 @@
     </div>
   </section>
 
-  <!-- Step 3: Session Details -->
+  <!-- Step 3: Desires (was interests) -->
   <section class="step step-content" data-step="3">
     <div class="container">
       <div id="whisper-3" class="whisper"></div>
       <h2>What Is It That You Truly Desire</h2>
+      <p class="prose-short">Select everything that calls to you. For each, confess how deep your devotion runs.</p>
+      <div id="categories-container"></div>
+      <div class="step-nav">
+        <button class="nav-btn back step-back" data-back="2">Back</button>
+        <button class="nav-btn step-next" data-next="4">Yes, Goddess</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Step 4: Limits -->
+  <section class="step step-content" data-step="4">
+    <div class="container">
+      <div id="whisper-4" class="whisper"></div>
+      <p class="step-label">The Binding</p>
+      <h2>Know Your Limits</h2>
+      <form id="form-limits" novalidate>
+        <div class="field">
+          <label for="hard-limits">Hard Limits <span class="req">*</span></label>
+          <textarea id="hard-limits" name="hard_limits" rows="4" required placeholder="What must never be crossed? Be honest — even a Goddess honours a boundary."></textarea>
+        </div>
+        <div class="field">
+          <label for="trigger-positive">Words That Excite You</label>
+          <input type="text" id="trigger-positive" name="trigger_positive" placeholder="e.g. degradation, praise, being told you're mine">
+        </div>
+        <div class="field">
+          <label for="trigger-negative">Words That Should Be Avoided</label>
+          <input type="text" id="trigger-negative" name="trigger_negative" placeholder="e.g. specific insults, names, themes">
+        </div>
+        <div class="field">
+          <label for="trigger-context">Anything to Explain?</label>
+          <textarea id="trigger-context" name="trigger_context" rows="3" placeholder="Context behind any of the above — I want to understand, not just obey a list."></textarea>
+        </div>
+        <div class="field">
+          <label for="health">Health or Medical Information</label>
+          <textarea id="health" name="health" rows="3" placeholder="Anything I must know — physical or psychological. Hide nothing from me."></textarea>
+        </div>
+        <div class="step-nav">
+          <button type="button" class="nav-btn back step-back" data-back="3">Back</button>
+          <button type="submit" class="nav-btn step-next" data-next="5">Yes, Goddess</button>
+        </div>
+      </form>
+    </div>
+  </section>
+
+  <!-- Step 5: Session Details (moved later) -->
+  <section class="step step-content" data-step="5">
+    <div class="container">
+      <div id="whisper-5" class="whisper"></div>
+      <p class="step-label">The Summoning</p>
+      <h2>When and How</h2>
       <form id="form-session" novalidate>
         <div class="field-row">
           <div class="field">
@@ -120,56 +190,6 @@
         <div class="field">
           <label for="preferred-dates">Preferred Dates or Availability</label>
           <input type="text" id="preferred-dates" name="preferred_dates" placeholder="e.g. weekday evenings, a specific date, or flexible">
-        </div>
-        <div class="step-nav">
-          <button type="button" class="nav-btn back step-back" data-back="2">Back</button>
-          <button type="submit" class="nav-btn step-next" data-next="4">Yes, Goddess</button>
-        </div>
-      </form>
-    </div>
-  </section>
-
-  <!-- Step 4: Interests -->
-  <section class="step step-content" data-step="4">
-    <div class="container">
-      <div id="whisper-4" class="whisper"></div>
-      <p class="step-label">The Confession</p>
-      <h2>Bare Your Devotion</h2>
-      <p class="prose-short">Select everything that calls to you. For each, confess how deep your devotion runs.</p>
-      <div id="categories-container"></div>
-      <div class="step-nav">
-        <button class="nav-btn back step-back" data-back="3">Back</button>
-        <button class="nav-btn step-next" data-next="5">Yes, Goddess</button>
-      </div>
-    </div>
-  </section>
-
-  <!-- Step 5: Limits -->
-  <section class="step step-content" data-step="5">
-    <div class="container">
-      <div id="whisper-5" class="whisper"></div>
-      <p class="step-label">The Binding</p>
-      <h2>Know Your Limits</h2>
-      <form id="form-limits" novalidate>
-        <div class="field">
-          <label for="hard-limits">Hard Limits <span class="req">*</span></label>
-          <textarea id="hard-limits" name="hard_limits" rows="4" required placeholder="What must never be crossed? Be honest — even a Goddess honours a boundary."></textarea>
-        </div>
-        <div class="field">
-          <label for="trigger-positive">Words That Excite You</label>
-          <input type="text" id="trigger-positive" name="trigger_positive" placeholder="e.g. degradation, praise, being told you're mine">
-        </div>
-        <div class="field">
-          <label for="trigger-negative">Words That Should Be Avoided</label>
-          <input type="text" id="trigger-negative" name="trigger_negative" placeholder="e.g. specific insults, names, themes">
-        </div>
-        <div class="field">
-          <label for="trigger-context">Anything to Explain?</label>
-          <textarea id="trigger-context" name="trigger_context" rows="3" placeholder="Context behind any of the above — I want to understand, not just obey a list."></textarea>
-        </div>
-        <div class="field">
-          <label for="health">Health or Medical Information</label>
-          <textarea id="health" name="health" rows="3" placeholder="Anything I must know — physical or psychological. Hide nothing from me."></textarea>
         </div>
         <div class="step-nav">
           <button type="button" class="nav-btn back step-back" data-back="4">Back</button>
