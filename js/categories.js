@@ -1,8 +1,7 @@
 /**
  * DeciBelle — Category Configuration
  * ====================================
- * Edit this file to add/remove/reorder categories.
- * Each category gets a card with interest, experience, importance, and boundaries.
+ * Checkbox + expand pattern: tick to select, details slide open.
  */
 
 const CATEGORIES = [
@@ -24,15 +23,6 @@ const CATEGORIES = [
   { id: 'other',         name: 'Other (specify below)', icon: '✦' },
 ];
 
-const INTEREST_LEVELS = [
-  { value: '', label: 'Select…' },
-  { value: 'not-interested', label: 'Not interested' },
-  { value: 'curious', label: 'Curious' },
-  { value: 'interested', label: 'Interested' },
-  { value: 'very-interested', label: 'Very interested' },
-  { value: 'essential', label: 'Essential / must-have' },
-];
-
 const EXPERIENCE_LEVELS = [
   { value: '', label: 'Select…' },
   { value: 'none', label: 'None' },
@@ -44,48 +34,58 @@ const EXPERIENCE_LEVELS = [
 
 const IMPORTANCE_LEVELS = [
   { value: '', label: 'Select…' },
-  { value: 'optional', label: 'Optional' },
-  { value: 'nice-to-have', label: 'Nice to have' },
+  { value: 'optional', label: 'Nice to have' },
   { value: 'important', label: 'Important' },
   { value: 'priority', label: 'High priority' },
+  { value: 'essential', label: 'Essential' },
 ];
 
-// ── Render categories ──────────────────
+function makeSelect(name, id, options) {
+  const opts = options.map(o => `<option value="${o.value}">${o.label}</option>`).join('');
+  return `<select name="${name}" id="${id}">${opts}</select>`;
+}
+
 function renderCategories() {
   const container = document.getElementById('categories-container');
   if (!container) return;
 
   container.innerHTML = CATEGORIES.map(cat => `
     <div class="category-card" data-category="${cat.id}">
-      <div class="category-header">
+      <label class="category-toggle">
+        <input type="checkbox" name="selected_${cat.id}" value="1" class="cat-checkbox">
+        <span class="cat-check-box"></span>
         <span class="cat-icon">${cat.icon}</span>
-        ${cat.name}
-      </div>
-      <div class="cat-fields">
-        <div>
-          <label for="interest-${cat.id}">Interest</label>
-          ${makeSelect(`interest_${cat.id}`, `interest-${cat.id}`, INTEREST_LEVELS)}
+        <span class="cat-name">${cat.name}</span>
+      </label>
+      <div class="cat-details">
+        <div class="cat-fields">
+          <div>
+            <label for="experience-${cat.id}">Experience Level</label>
+            ${makeSelect(`experience_${cat.id}`, `experience-${cat.id}`, EXPERIENCE_LEVELS)}
+          </div>
+          <div>
+            <label for="importance-${cat.id}">How Important?</label>
+            ${makeSelect(`importance_${cat.id}`, `importance-${cat.id}`, IMPORTANCE_LEVELS)}
+          </div>
         </div>
-        <div>
-          <label for="experience-${cat.id}">Experience</label>
-          ${makeSelect(`experience_${cat.id}`, `experience-${cat.id}`, EXPERIENCE_LEVELS)}
+        <div class="cat-boundary">
+          <label for="boundary-${cat.id}">Boundaries & Notes</label>
+          <textarea id="boundary-${cat.id}" name="boundary_${cat.id}" rows="2" placeholder="Specific limits, preferences, or requests…"></textarea>
         </div>
-        <div>
-          <label for="importance-${cat.id}">Importance</label>
-          ${makeSelect(`importance_${cat.id}`, `importance-${cat.id}`, IMPORTANCE_LEVELS)}
-        </div>
-      </div>
-      <div class="cat-boundary">
-        <label for="boundary-${cat.id}">Boundaries / Notes</label>
-        <textarea id="boundary-${cat.id}" name="boundary_${cat.id}" rows="2" placeholder="Specific limits, preferences, or requests for this category…"></textarea>
       </div>
     </div>
   `).join('');
-}
 
-function makeSelect(name, id, options) {
-  const opts = options.map(o => `<option value="${o.value}">${o.label}</option>`).join('');
-  return `<select name="${name}" id="${id}">${opts}</select>`;
+  // Toggle expand on check
+  container.addEventListener('change', (e) => {
+    if (!e.target.classList.contains('cat-checkbox')) return;
+    const card = e.target.closest('.category-card');
+    if (e.target.checked) {
+      card.classList.add('expanded');
+    } else {
+      card.classList.remove('expanded');
+    }
+  });
 }
 
 document.addEventListener('DOMContentLoaded', renderCategories);
