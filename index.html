@@ -10,137 +10,167 @@
 </head>
 <body>
 
-  <!-- Landing -->
-  <header class="hero">
+  <!-- Step 0: Landing -->
+  <section class="step step-hero active" data-step="0">
     <div class="hero-overlay"></div>
     <div class="hero-content">
       <div class="monogram">DB</div>
       <h1>DeciBelle</h1>
       <p class="tagline">Enter on my terms. Your devotion begins here.</p>
-      <a href="#enquiry" class="cta-btn">Submit an Enquiry</a>
+      <button class="cta-btn step-next" data-next="1">Begin</button>
     </div>
     <div class="deco-border top"></div>
     <div class="deco-border bottom"></div>
-  </header>
+  </section>
 
-  <!-- Expectations -->
-  <section class="about" id="about">
+  <!-- Step 1: Expectations -->
+  <section class="step step-content" data-step="1">
     <div class="container">
       <div class="deco-diamond"></div>
-      <h2>Read This First</h2>
-      <div class="about-text">
-        <p>I am selective about who I see. Submitting an enquiry does not entitle you to a response. I engage only with those who genuinely interest me.</p>
-        <p>Fill out the form below with care and honesty. Incomplete, vague, or low-effort submissions will be ignored.</p>
-        <p>A <a href="#tribute" class="inline-link">tribute</a> won't guarantee a session — but it will guarantee my attention.</p>
+      <h2>Before We Go Any Further</h2>
+      <div class="prose">
+        <p>I am selective about who I see.</p>
+        <p>Submitting an enquiry does not entitle you to a response. I engage only with those who genuinely interest me.</p>
+        <p>What follows is a series of questions. Answer them with care and honesty. Incomplete or low-effort submissions will be discarded without notice.</p>
       </div>
       <div class="deco-line"></div>
+      <div class="step-nav">
+        <button class="nav-btn step-next" data-next="2">I understand. Continue.</button>
+      </div>
     </div>
   </section>
 
-  <!-- Enquiry Form -->
-  <section class="enquiry" id="enquiry">
+  <!-- Step 2: About You -->
+  <section class="step step-content" data-step="2">
     <div class="container">
-      <h2>Session Enquiry</h2>
-
-      <form id="enquiry-form" novalidate>
-
-        <!-- Personal Details -->
-        <fieldset>
-          <legend>About You</legend>
-          <div class="field-row">
-            <div class="field">
-              <label for="name">Name or Alias <span class="req">*</span></label>
-              <input type="text" id="name" name="name" required>
-            </div>
-            <div class="field">
-              <label for="age">Age <span class="req">*</span></label>
-              <input type="number" id="age" name="age" min="18" required>
-            </div>
-          </div>
-          <div class="field-row">
-            <div class="field">
-              <label for="email">Email <span class="req">*</span></label>
-              <input type="email" id="email" name="email" required>
-            </div>
-            <div class="field">
-              <label for="pronouns">Your Pronouns</label>
-              <input type="text" id="pronouns" name="pronouns" placeholder="e.g. he/him, they/them">
-            </div>
+      <div class="step-count">I</div>
+      <h2>Tell Me Who You Are</h2>
+      <form id="form-about" novalidate>
+        <div class="field-row">
+          <div class="field">
+            <label for="name">Name or Alias <span class="req">*</span></label>
+            <input type="text" id="name" name="name" required>
           </div>
           <div class="field">
-            <label for="location">City or Region <span class="req">*</span></label>
-            <input type="text" id="location" name="location" required>
+            <label for="age">Age <span class="req">*</span></label>
+            <input type="number" id="age" name="age" min="18" required>
+          </div>
+        </div>
+        <div class="field-row">
+          <div class="field">
+            <label for="email">Email <span class="req">*</span></label>
+            <input type="email" id="email" name="email" required>
           </div>
           <div class="field">
-            <label for="about-you">Introduce Yourself <span class="req">*</span></label>
-            <textarea id="about-you" name="about_you" rows="3" required placeholder="Who are you? What draws you to this?"></textarea>
+            <label for="pronouns">Your Pronouns</label>
+            <input type="text" id="pronouns" name="pronouns" placeholder="e.g. he/him, they/them">
           </div>
-        </fieldset>
+        </div>
+        <div class="field">
+          <label for="location">City or Region <span class="req">*</span></label>
+          <input type="text" id="location" name="location" required>
+        </div>
+        <div class="field">
+          <label for="about-you">Introduce Yourself <span class="req">*</span></label>
+          <textarea id="about-you" name="about_you" rows="4" required placeholder="Who are you? What draws you to this?"></textarea>
+        </div>
+        <div class="step-nav">
+          <button type="button" class="nav-btn back step-back" data-back="1">Back</button>
+          <button type="submit" class="nav-btn step-next" data-next="3">Continue</button>
+        </div>
+      </form>
+    </div>
+  </section>
 
-        <!-- Session Preferences -->
-        <fieldset>
-          <legend>Session Details</legend>
-          <div class="field-row">
-            <div class="field">
-              <label for="duration">Duration <span class="req">*</span></label>
-              <select id="duration" name="duration" required>
-                <option value="">Select</option>
-                <option value="1hr">1 hour</option>
-                <option value="1.5hr">1.5 hours</option>
-                <option value="2hr">2 hours</option>
-                <option value="3hr">3 hours</option>
-                <option value="half-day">Half day (4+ hours)</option>
-                <option value="extended">Extended / Overnight</option>
-              </select>
-            </div>
-            <div class="field">
-              <label for="session-type">Format <span class="req">*</span></label>
-              <select id="session-type" name="session_type" required>
-                <option value="">Select</option>
-                <option value="in-person">In Person</option>
-                <option value="online">Online</option>
-                <option value="either">Open to Either</option>
-              </select>
-            </div>
+  <!-- Step 3: Session Details -->
+  <section class="step step-content" data-step="3">
+    <div class="container">
+      <div class="step-count">II</div>
+      <h2>What Are You Looking For</h2>
+      <form id="form-session" novalidate>
+        <div class="field-row">
+          <div class="field">
+            <label for="duration">Duration <span class="req">*</span></label>
+            <select id="duration" name="duration" required>
+              <option value="">Select</option>
+              <option value="1hr">1 hour</option>
+              <option value="1.5hr">1.5 hours</option>
+              <option value="2hr">2 hours</option>
+              <option value="3hr">3 hours</option>
+              <option value="half-day">Half day (4+ hours)</option>
+              <option value="extended">Extended / Overnight</option>
+            </select>
           </div>
           <div class="field">
-            <label for="preferred-dates">Preferred Dates or Availability</label>
-            <input type="text" id="preferred-dates" name="preferred_dates" placeholder="e.g. weekday evenings, a specific date, or flexible">
+            <label for="session-type">Format <span class="req">*</span></label>
+            <select id="session-type" name="session_type" required>
+              <option value="">Select</option>
+              <option value="in-person">In Person</option>
+              <option value="online">Online</option>
+              <option value="either">Open to Either</option>
+            </select>
           </div>
-        </fieldset>
+        </div>
+        <div class="field">
+          <label for="preferred-dates">Preferred Dates or Availability</label>
+          <input type="text" id="preferred-dates" name="preferred_dates" placeholder="e.g. weekday evenings, a specific date, or flexible">
+        </div>
+        <div class="step-nav">
+          <button type="button" class="nav-btn back step-back" data-back="2">Back</button>
+          <button type="submit" class="nav-btn step-next" data-next="4">Continue</button>
+        </div>
+      </form>
+    </div>
+  </section>
 
-        <!-- Categories -->
-        <fieldset class="categories-fieldset">
-          <legend>Interests</legend>
-          <p class="field-note">Tick everything that appeals to you. For each, tell me how experienced you are and how important it is to your session.</p>
-          <div id="categories-container"></div>
-        </fieldset>
+  <!-- Step 4: Interests -->
+  <section class="step step-content" data-step="4">
+    <div class="container">
+      <div class="step-count">III</div>
+      <h2>Your Interests</h2>
+      <p class="prose-short">Select everything that appeals to you. For each, tell me your experience and how important it is.</p>
+      <div id="categories-container"></div>
+      <div class="step-nav">
+        <button class="nav-btn back step-back" data-back="3">Back</button>
+        <button class="nav-btn step-next" data-next="5">Continue</button>
+      </div>
+    </div>
+  </section>
 
-        <!-- Limits & Health -->
-        <fieldset>
-          <legend>Limits &amp; Health</legend>
-          <div class="field">
-            <label for="hard-limits">Hard Limits <span class="req">*</span></label>
-            <textarea id="hard-limits" name="hard_limits" rows="3" required placeholder="What is completely off the table? Be specific — this protects us both."></textarea>
-          </div>
-          <div class="field">
-            <label for="health">Health or Medical Information</label>
-            <textarea id="health" name="health" rows="2" placeholder="Anything relevant — physical or psychological."></textarea>
-          </div>
-        </fieldset>
+  <!-- Step 5: Limits -->
+  <section class="step step-content" data-step="5">
+    <div class="container">
+      <div class="step-count">IV</div>
+      <h2>Your Limits</h2>
+      <form id="form-limits" novalidate>
+        <div class="field">
+          <label for="hard-limits">Hard Limits <span class="req">*</span></label>
+          <textarea id="hard-limits" name="hard_limits" rows="4" required placeholder="What is completely off the table? Be specific. This protects us both."></textarea>
+        </div>
+        <div class="field">
+          <label for="health">Health or Medical Information</label>
+          <textarea id="health" name="health" rows="3" placeholder="Anything I should be aware of — physical or psychological."></textarea>
+        </div>
+        <div class="step-nav">
+          <button type="button" class="nav-btn back step-back" data-back="4">Back</button>
+          <button type="submit" class="nav-btn step-next" data-next="6">Continue</button>
+        </div>
+      </form>
+    </div>
+  </section>
 
-        <!-- Additional -->
-        <fieldset>
-          <legend>Anything Else</legend>
-          <div class="field">
-            <label for="additional">Scenarios, Fantasies, Questions</label>
-            <textarea id="additional" name="additional" rows="3" placeholder="Anything you'd like me to know that isn't covered above."></textarea>
-          </div>
-        </fieldset>
+  <!-- Step 6: Final -->
+  <section class="step step-content" data-step="6">
+    <div class="container">
+      <div class="step-count">V</div>
+      <h2>Anything Else</h2>
+      <form id="form-final" novalidate>
+        <div class="field">
+          <label for="additional">Scenarios, fantasies, questions</label>
+          <textarea id="additional" name="additional" rows="4" placeholder="Anything not covered above that you'd like me to know."></textarea>
+        </div>
 
-        <!-- Consent -->
-        <fieldset>
-          <legend>Acknowledgements</legend>
+        <div class="consent-block">
           <label class="checkbox-label">
             <input type="checkbox" name="consent_age" required>
             <span>I confirm I am at least 18 years old. <span class="req">*</span></span>
@@ -157,49 +187,41 @@
             <input type="checkbox" name="consent_privacy" required>
             <span>I consent to my information being used solely for this enquiry. <span class="req">*</span></span>
           </label>
-        </fieldset>
+        </div>
 
-        <button type="submit" class="submit-btn">Submit Enquiry</button>
+        <div class="step-nav">
+          <button type="button" class="nav-btn back step-back" data-back="5">Back</button>
+          <button type="submit" class="submit-btn">Submit Enquiry</button>
+        </div>
       </form>
     </div>
   </section>
 
-  <!-- Tribute -->
-  <section class="tribute" id="tribute">
-    <div class="container">
+  <!-- Step 7: Confirmation -->
+  <section class="step step-content" data-step="7">
+    <div class="container confirmation">
       <div class="deco-diamond"></div>
-      <h2>Tribute</h2>
-      <p>A tribute is a gesture of sincerity and respect for my time. It does not guarantee a session — but it guarantees my attention.</p>
-      <div class="tribute-options">
-        <a href="#" class="tribute-link" id="wishlist-link">Wishlist</a>
-        <a href="#" class="tribute-link" id="giftcard-link">Gift Card</a>
+      <h2>Enquiry Received</h2>
+      <div class="prose">
+        <p>Your submission is with me. I will review it at my discretion.</p>
+        <p><strong>A response is not guaranteed.</strong> I reply only to enquiries that interest me.</p>
       </div>
-      <p class="tribute-note">Links provided after submission or on request.</p>
+      <div class="tribute-nudge">
+        <p>Want to improve your chances? A tribute demonstrates sincerity and respect for my time.</p>
+        <div class="tribute-options">
+          <a href="#" class="tribute-link" id="wishlist-link">Wishlist</a>
+          <a href="#" class="tribute-link" id="giftcard-link">Gift Card</a>
+        </div>
+      </div>
+      <div class="deco-line"></div>
+      <p class="sign-off">Discretion assured. Privacy respected.</p>
     </div>
   </section>
 
-  <!-- Confirmation Modal -->
-  <div class="modal-overlay" id="confirmation-modal">
-    <div class="modal">
-      <div class="modal-deco"></div>
-      <h3>Enquiry Received</h3>
-      <p>Your submission is with me. I will review it at my discretion.</p>
-      <p><strong>A response is not guaranteed.</strong> I reply only to enquiries that interest me.</p>
-      <div class="modal-highlight">
-        <p>Want to improve your chances? A <a href="#tribute" class="inline-link" id="modal-tribute-link">tribute</a> goes a long way.</p>
-      </div>
-      <button class="modal-close" id="modal-close">Understood</button>
-    </div>
+  <!-- Progress -->
+  <div class="progress-bar" id="progress-bar">
+    <div class="progress-fill" id="progress-fill"></div>
   </div>
-
-  <!-- Footer -->
-  <footer>
-    <div class="container">
-      <div class="deco-line"></div>
-      <p class="footer-text">DeciBelle</p>
-      <p class="footer-sub">Discretion assured. Privacy respected.</p>
-    </div>
-  </footer>
 
   <script src="js/categories.js"></script>
   <script src="js/form.js"></script>

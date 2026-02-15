@@ -1,98 +1,147 @@
 /**
- * DeciBelle — Form Handling
- * ==========================
- * Static site version: collects form data and sends via EmailJS / Formspree / etc.
- * For now, shows confirmation modal. Hook up your preferred backend below.
+ * DeciBelle — Step Navigation & Form Handling
  */
 
 document.addEventListener('DOMContentLoaded', () => {
-  const form = document.getElementById('enquiry-form');
-  const modal = document.getElementById('confirmation-modal');
-  const modalClose = document.getElementById('modal-close');
-  const modalTributeLink = document.getElementById('modal-tribute-link');
+  const steps = document.querySelectorAll('.step');
+  const progressBar = document.getElementById('progress-bar');
+  const progressFill = document.getElementById('progress-fill');
+  const totalSteps = 7; // 0=hero, 1=expectations, 2-6=form, 7=confirmation
+  let currentStep = 0;
 
-  form.addEventListener('submit', (e) => {
-    e.preventDefault();
+  // Collected form data across steps
+  const formData = {};
 
-    // Clear previous errors
-    form.querySelectorAll('.field-error').forEach(el => el.classList.remove('field-error'));
-    form.querySelectorAll('.error-msg').forEach(el => el.remove());
+  function goToStep(n) {
+    const current = document.querySelector(`.step[data-step="${currentStep}"]`);
+    const next = document.querySelector(`.step[data-step="${n}"]`);
+    if (!current || !next) return;
 
-    // Validate required fields
+    current.classList.remove('active', 'fade-in');
+    current.style.display = 'none';
+
+    next.style.display = 'flex';
+    // Trigger reflow for animation
+    void next.offsetWidth;
+    next.classList.add('active', 'fade-in');
+
+    currentStep = n;
+    window.scrollTo({ top: 0, behavior: 'instant' });
+
+    // Progress bar
+    if (n === 0) {
+      progressBar.classList.remove('visible');
+    } else if (n === totalSteps) {
+      progressFill.style.width = '100%';
+      setTimeout(() => progressBar.classList.remove('visible'), 800);
+    } else {
+      progressBar.classList.add('visible');
+      const pct = ((n) / (totalSteps - 1)) * 100;
+      progressFill.style.width = pct + '%';
+    }
+  }
+
+  // Collect fields from a container into formData
+  function collectFields(container) {
+    container.querySelectorAll('input, select, textarea').forEach(el => {
+      if (el.type === 'checkbox') {
+        formData[el.name] = el.checked;
+      } else if (el.value.trim()) {
+        formData[el.name] = el.value.trim();
+      }
+    });
+  }
+
+  // Validate required fields in a container
+  function validateStep(container) {
     let valid = true;
-    form.querySelectorAll('[required]').forEach(field => {
+    container.querySelectorAll('.field-error').forEach(el => el.classList.remove('field-error'));
+    container.querySelectorAll('.error-msg').forEach(el => el.remove());
+
+    container.querySelectorAll('[required]').forEach(field => {
       if (field.type === 'checkbox' && !field.checked) {
         valid = false;
         field.closest('.checkbox-label')?.classList.add('field-error');
       } else if (!field.value.trim()) {
         valid = false;
         const wrapper = field.closest('.field') || field.parentElement;
-        wrapper.classList.add('field-error');
+        wrapper?.classList.add('field-error');
       }
     });
 
-    // Age validation
-    const age = parseInt(form.querySelector('#age')?.value);
-    if (age && age < 18) {
+    // Age check
+    const ageField = container.querySelector('#age');
+    if (ageField && ageField.value && parseInt(ageField.value) < 18) {
       valid = false;
-      const ageField = form.querySelector('#age').closest('.field');
-      ageField.classList.add('field-error');
+      const wrapper = ageField.closest('.field');
+      wrapper?.classList.add('field-error');
       const msg = document.createElement('div');
       msg.className = 'error-msg';
       msg.textContent = 'You must be 18 or older.';
-      ageField.appendChild(msg);
+      wrapper?.appendChild(msg);
     }
 
     if (!valid) {
-      // Scroll to first error
-      const firstError = form.querySelector('.field-error');
-      firstError?.scrollIntoView({ behavior: 'smooth', block: 'center' });
-      return;
+      const first = container.querySelector('.field-error');
+      first?.scrollIntoView({ behavior: 'smooth', block: 'center' });
     }
 
-    // Collect form data
-    const formData = new FormData(form);
-    const data = {};
-    for (const [key, value] of formData.entries()) {
-      data[key] = value;
+    return valid;
+  }
+
+  // Click handlers for step navigation
+  document.addEventListener('click', (e) => {
+    const nextBtn = e.target.closest('.step-next');
+    const backBtn = e.target.closest('.step-back');
+
+    if (nextBtn && !nextBtn.matches('[type="submit"]')) {
+      e.preventDefault();
+      const nextStep = parseInt(nextBtn.dataset.next);
+      const currentContainer = document.querySelector(`.step[data-step="${currentStep}"]`);
+      collectFields(currentContainer);
+      goToStep(nextStep);
     }
 
-    console.log('Enquiry submitted:', data);
-
-    // ═══════════════════════════════════════════
-    // TODO: Send data to your backend here.
-    //
-    // Options:
-    // 1. Formspree (free): change form action to https://formspree.io/f/YOUR_ID
-    // 2. EmailJS: emailjs.send(serviceId, templateId, data)
-    // 3. Google Forms: POST to your form URL
-    // 4. Custom API: fetch('/api/enquiry', { method: 'POST', body: JSON.stringify(data) })
-    //
-    // For now, data is logged to console and modal is shown.
-    // ═══════════════════════════════════════════
-
-    // Show confirmation modal
-    modal.classList.add('active');
-
-    // Reset form
-    form.reset();
+    if (backBtn) {
+      e.preventDefault();
+      const backStep = parseInt(backBtn.dataset.back);
+      goToStep(backStep);
+    }
   });
 
-  // Close modal
-  modalClose?.addEventListener('click', () => {
-    modal.classList.remove('active');
-  });
+  // Form submissions (steps with validation)
+  document.querySelectorAll('form').forEach(form => {
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const step = form.closest('.step');
+      const stepNum = parseInt(step.dataset.step);
 
-  modal?.addEventListener('click', (e) => {
-    if (e.target === modal) modal.classList.remove('active');
-  });
+      if (!validateStep(form)) return;
+      collectFields(form);
 
-  modalTributeLink?.addEventListener('click', (e) => {
-    modal.classList.remove('active');
-  });
+      // Final step?
+      if (form.id === 'form-final') {
+        // Also collect categories
+        const catContainer = document.getElementById('categories-container');
+        if (catContainer) collectFields(catContainer);
 
-  // Escape key closes modal
-  document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape') modal.classList.remove('active');
+        console.log('Full enquiry:', formData);
+
+        // ═══════════════════════════════════
+        // TODO: Hook up backend here
+        // e.g. fetch('https://formspree.io/f/YOUR_ID', {
+        //   method: 'POST',
+        //   headers: { 'Content-Type': 'application/json' },
+        //   body: JSON.stringify(formData)
+        // });
+        // ═══════════════════════════════════
+
+        goToStep(7);
+      } else {
+        const nextBtn = form.querySelector('.step-next');
+        const nextStep = parseInt(nextBtn?.dataset.next);
+        if (nextStep) goToStep(nextStep);
+      }
+    });
   });
 });
