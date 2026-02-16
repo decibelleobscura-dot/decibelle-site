@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Preview C — Split Layout</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { background: #0a0a0a; color: #e8dcc8; font-family: 'Cormorant Garamond', serif; }
+    .hero {
+      min-height: 100vh;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      overflow: hidden;
+    }
+    .hero-image {
+      position: relative;
+      overflow: hidden;
+    }
+    .hero-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center top;
+      display: block;
+    }
+    .hero-image::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to right, transparent 60%, #0a0a0a 100%);
+    }
+    .hero-text {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      justify-content: center;
+      padding: 4rem 3rem;
+      background: radial-gradient(ellipse at 0% 50%, rgba(107,28,42,0.08) 0%, transparent 60%), #0a0a0a;
+    }
+    .monogram {
+      font-family: 'Cinzel', serif;
+      font-size: 1rem;
+      letter-spacing: 0.8em;
+      color: #a08450;
+      border: 1px solid #a08450;
+      display: inline-block;
+      padding: 0.5em 0.8em 0.5em 1.6em;
+      margin-bottom: 2rem;
+    }
+    h1 {
+      font-family: 'Cinzel', serif;
+      font-size: clamp(1.8rem, 4vw, 3.5rem);
+      font-weight: 400;
+      letter-spacing: 0.25em;
+      color: #f2ede6;
+      text-transform: uppercase;
+      margin-bottom: 0.5rem;
+    }
+    .tagline {
+      font-style: italic;
+      font-size: clamp(1rem, 2vw, 1.15rem);
+      color: #a08450;
+      letter-spacing: 0.1em;
+      margin-bottom: 3rem;
+    }
+    .cta-btn {
+      display: inline-block;
+      font-family: 'Cinzel', serif;
+      font-size: 0.8rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: #f2ede6;
+      border: 1px solid #6b1c2a;
+      padding: 1em 3em;
+      background: transparent;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+    .cta-btn:hover { background: #6b1c2a; box-shadow: 0 0 30px rgba(107,28,42,0.3); }
+    .label { font-family: 'Cinzel', serif; font-size: 0.75rem; letter-spacing: 0.3em; color: #777; margin-top: 3rem; text-transform: uppercase; }
+
+    @media (max-width: 768px) {
+      .hero {
+        grid-template-columns: 1fr;
+        grid-template-rows: 50vh auto;
+      }
+      .hero-image::after {
+        background: linear-gradient(to bottom, transparent 50%, #0a0a0a 100%);
+      }
+      .hero-text {
+        align-items: center;
+        text-align: center;
+        padding: 2rem 1.5rem 4rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <section class="hero">
+    <div class="hero-image">
+      <img src="img/hero.jpg" alt="DeciBelle">
+    </div>
+    <div class="hero-text">
+      <div class="monogram">DB</div>
+      <h1>DeciBelle</h1>
+      <p class="tagline">Enter on my terms. Your devotion begins here.</p>
+      <button class="cta-btn">Submit to Me</button>
+      <p class="label">Option C — Split Layout</p>
+    </div>
+  </section>
+</body>
+</html>
