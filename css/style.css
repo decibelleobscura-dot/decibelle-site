@@ -79,28 +79,49 @@ a:hover { color: var(--burgundy-glow); }
 /* ── Hero (Step 0) ────────────────── */
 .step-hero {
   position: relative;
-  text-align: center;
   overflow: hidden;
   background: var(--black);
-  padding: 2rem 1.5rem;
+  padding: 0;
 }
 
-.hero-bg {
-  position: absolute;
-  inset: 0;
-  background: url('../img/bg-goddess.jpg') center center / cover no-repeat;
-  opacity: 0.35;
+.hero-split {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  min-height: 100vh;
+  min-height: 100dvh;
+  width: 100%;
 }
 
-.hero-overlay {
+.hero-image {
+  position: relative;
+  overflow: hidden;
+}
+.hero-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center top;
+  display: block;
+}
+.hero-image::after {
+  content: '';
   position: absolute;
   inset: 0;
+  background: linear-gradient(to right, transparent 50%, var(--black) 100%);
+}
+
+.hero-text {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 4rem 3rem;
+  position: relative;
   background:
-    radial-gradient(ellipse at 50% 40%, rgba(107,28,42,0.15) 0%, rgba(10,10,10,0.9) 70%);
-  pointer-events: none;
+    radial-gradient(ellipse at 0% 50%, rgba(107,28,42,0.08) 0%, transparent 60%),
+    var(--black);
 }
-
-.hero-content { position: relative; z-index: 1; }
 
 .monogram {
   font-family: var(--font-display);
@@ -115,7 +136,7 @@ a:hover { color: var(--burgundy-glow); }
 
 .step-hero h1 {
   font-family: var(--font-display);
-  font-size: clamp(2rem, 6vw, 4.5rem);
+  font-size: clamp(1.8rem, 4vw, 3.5rem);
   font-weight: 400;
   letter-spacing: 0.25em;
   color: var(--white);
@@ -125,7 +146,7 @@ a:hover { color: var(--burgundy-glow); }
 
 .tagline {
   font-style: italic;
-  font-size: clamp(1rem, 2.5vw, 1.15rem);
+  font-size: clamp(1rem, 2vw, 1.15rem);
   color: var(--gold-dim);
   letter-spacing: 0.1em;
   margin-bottom: 3rem;
@@ -149,8 +170,8 @@ a:hover { color: var(--burgundy-glow); }
   box-shadow: 0 0 30px rgba(107,28,42,0.25);
 }
 
-/* Deco borders */
-.deco-border {
+/* Deco borders — repositioned for split layout */
+.hero-text .deco-border {
   position: absolute;
   left: 50%;
   transform: translateX(-50%);
@@ -158,8 +179,8 @@ a:hover { color: var(--burgundy-glow); }
   height: 1px;
   background: var(--gold-dim);
 }
-.deco-border.top { top: 2rem; }
-.deco-border.bottom { bottom: 2rem; }
+.hero-text .deco-border.top { top: 2rem; }
+.hero-text .deco-border.bottom { bottom: 2rem; }
 .deco-border::before,
 .deco-border::after {
   content: '';
@@ -679,7 +700,21 @@ select option { background: var(--black); color: var(--cream); }
   body { font-size: 16px; }
   .container { padding: 0 1.25rem; }
   .step { padding: 3rem 0; min-height: 100dvh; }
-  .step-hero { min-height: 100dvh; }
+  .step-hero { min-height: auto; }
+
+  .hero-split {
+    grid-template-columns: 1fr;
+    grid-template-rows: 55vh auto;
+    min-height: 100dvh;
+  }
+  .hero-image::after {
+    background: linear-gradient(to bottom, transparent 40%, var(--black) 100%);
+  }
+  .hero-text {
+    padding: 2rem 1.5rem 4rem;
+    margin-top: -3rem;
+    z-index: 1;
+  }
 
   .monogram { margin-bottom: 1.5rem; font-size: 0.9rem; }
   .tagline { margin-bottom: 2.5rem; }
